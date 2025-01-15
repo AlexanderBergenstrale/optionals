@@ -9,7 +9,6 @@ public class CameraApplication {
     public static void main(String[] args) {
 
         // Skriver bara ut om det finns en kamera i optional:en
-
         var foundCamera = Camera.findCamera(FUJICA);
         foundCamera.ifPresent(x -> System.out.println("First: " + x));
         // annars händer inget
