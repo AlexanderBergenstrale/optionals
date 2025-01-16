@@ -1,4 +1,4 @@
-package main.camera;
+package main.optionals;
 
 import lombok.Builder;
 import lombok.Data;

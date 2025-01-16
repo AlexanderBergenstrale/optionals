@@ -1,6 +1,4 @@
-package main;
-
-import main.camera.Camera;
+package main.optionals;
 
 public class CameraApplication {
     static final String FUJICA = "Fujica";
