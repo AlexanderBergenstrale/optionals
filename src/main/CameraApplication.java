@@ -12,12 +12,12 @@ public class CameraApplication {
         var foundCamera = Camera.findCamera(FUJICA);
         foundCamera.ifPresent(x -> System.out.println("First: " + x));
         // annars händer inget
-        var foundOtherCamera = Camera.findCamera(NIKON);
-        foundOtherCamera.ifPresent(x -> System.out.println("Second: " + x));
+        var noCameraFound = Camera.findCamera(NIKON);
+        noCameraFound.ifPresent(x -> System.out.println("Second: " + x));
 
         // Om första kameran ej finns försöker vi returnera den andra kameran
         // finns inte den heller kastar vi exception
-        var thisCameraExists = foundOtherCamera.orElse(foundCamera.orElseThrow());
+        var thisCameraExists = noCameraFound.orElse(foundCamera.orElseThrow());
         System.out.println("Third: " + thisCameraExists);
 
         // Vi kör filter på en optional för att bara skriva ut den om den är analog
@@ -25,7 +25,7 @@ public class CameraApplication {
                 .filter(Camera::isAnalog)
                 .ifPresent(x -> System.out.println("Fourth: " + x));
         // annars händer inget även om det inte ens finns en kamera i vår optional
-        foundOtherCamera
+        noCameraFound
                 .filter(Camera::isAnalog)
                 .ifPresent(x -> System.out.println("Fifth: " + x));
 
