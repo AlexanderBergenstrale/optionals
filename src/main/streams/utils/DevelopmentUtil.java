@@ -176,9 +176,20 @@ public class DevelopmentUtil {
 
     public static List<Developingtime> createDevelopingtimeForFilm(Film film, List<Developer> developers) {
 
+        // strömmar listan och filtrerar bort alla framkallare av fel sort (färg/BW)
+        // och även de framkallare som gått över bäst före
+        // mappar slutligen film och framkallare till en developingtime
         return developers.stream()
+                // .filter producerar en ny stream baserat på
+                // ett Predicate, som tar en "sak", i detta fall en Developer
+                // och returnerar den om den stämmer med kontrollen
                 .filter(d -> d.color() == film.color())
                 .filter(d -> d.bestBefore().isAfter(LocalDate.now()))
+                // .map tar in en Function, dvs den tar emot en sak
+                // och transformerar om den till något nytt (eller samma)
+                // i detta fall tar den emot en Developer
+                // och skapar en Developingtime
+                // med d (developern) och film som input till buildermetoden
                 .map(d -> Developingtime.builder()
                         .developer(d)
                         .film(film)
@@ -186,8 +197,10 @@ public class DevelopmentUtil {
                         .build()).toList();
     }
 
-    public static void print(List<Developingtime> input) {
 
+    public static void print(List<Developingtime> input) {
+        // .forEach tar en consumer som tar emot en sak och returnerar ingenting
+        // i detta fall tar den emot en Developingtime och skriver ut den
         input.forEach(dt ->
                 System.out.println(
                         "Developingtime for film: " + dt.film().make()
